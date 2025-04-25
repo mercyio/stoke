@@ -12,7 +12,7 @@ const Duel: React.FC = () => {
       className="w-full"
     >
       <div className="mb-8">
-        <NeonHeading color="sol" level={2} className="mb-4">
+        <NeonHeading color="btc" level={2} className="mb-4">
           Crypto Duels
         </NeonHeading>
         <p className="text-gray-400">
@@ -29,10 +29,10 @@ const Duel: React.FC = () => {
           </NeonButton>
         </NeonCard>
         
-        <NeonCard color="eth" className="p-6">
+        <NeonCard color="btc" className="p-6">
           <h3 className="text-xl font-semibold mb-4">Join a Duel</h3>
           <p className="text-gray-400 mb-6">Browse open challenges and join the competition</p>
-          <NeonButton color="eth" className="w-full">
+          <NeonButton color="btc" className="w-full">
             Find Open Duels
           </NeonButton>
         </NeonCard>

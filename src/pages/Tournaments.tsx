@@ -93,7 +93,7 @@ const Tournaments: React.FC = () => {
       className="w-full"
     >
       <div className="mb-8">
-        <NeonHeading color="eth" level={2} className="mb-4">
+        <NeonHeading color="btc" level={2} className="mb-4">
           Tournaments
         </NeonHeading>
         <p className="text-gray-400">

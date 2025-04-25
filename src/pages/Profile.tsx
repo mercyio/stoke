@@ -84,7 +84,7 @@ const Profile: React.FC = () => {
           </div>
           
           <div className="flex gap-3">
-            <NeonButton color="eth" icon={<Share2 size={16} />}>
+            <NeonButton color="btc" icon={<Share2 size={16} />}>
               Share Profile
             </NeonButton>
             <NeonButton color="sol" icon={<Edit2 size={16} />}>
@@ -141,7 +141,7 @@ const Profile: React.FC = () => {
       
       {/* Recent Activity */}
       <div className="mb-8">
-        <NeonHeading color="eth" level={3} className="mb-6">
+        <NeonHeading color="btc" level={3} className="mb-6">
           Recent Activity
         </NeonHeading>
         
@@ -223,7 +223,7 @@ const Profile: React.FC = () => {
       
       {/* Achievements */}
       <div>
-        <NeonHeading color="eth" level={3} className="mb-6">
+        <NeonHeading color="btc" level={3} className="mb-6">
           Achievements
         </NeonHeading>
         

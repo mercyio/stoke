@@ -12,7 +12,7 @@ const Vault = () => {
     >
       <div className="flex items-center gap-3 mb-6">
         <VaultIcon className="w-8 h-8 text-purple-500" />
-        <h1 className="text-3xl font-bold">Vault</h1>
+        <h1 className="text-3xl font-bold" color='btc'>Vault</h1>
       </div>
       
       <div className="grid gap-6">
