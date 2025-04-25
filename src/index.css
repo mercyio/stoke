@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background-dark text-white min-h-screen;
+  font-feature-settings: 'cv01', 'cv02', 'cv03', 'cv04';
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron tracking-wide;
+  }
+}
+
+@layer components {
+  .neon-glow {
+    box-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
+    border-color: var(--neon-color);
+  }
+  
+  .neon-text {
+    text-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
+    color: var(--neon-color);
+  }
+  
+  .btn-neon {
+    @apply relative inline-flex items-center justify-center border-2 rounded-md px-4 py-2 
+    font-medium transition-all duration-300 overflow-hidden;
+    box-shadow: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
+    border-color: var(--neon-color);
+    color: var(--neon-color);
+  }
+  
+  .btn-neon:hover, .btn-neon:focus {
+    @apply outline-none;
+    box-shadow: 0 0 10px var(--neon-color), 0 0 20px var(--neon-color);
+    background-color: color-mix(in srgb, var(--neon-color) 15%, transparent);
+  }
+  
+  .cyberpunk-card {
+    @apply bg-background-card border border-gray-750 rounded-lg overflow-hidden relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+  
+  .cyberpunk-card-accent {
+    @apply cyberpunk-card border-2;
+    border-color: var(--neon-color);
+    box-shadow: 0 0 10px var(--neon-color), 0 0 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-750 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-700;
+}
