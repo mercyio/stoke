@@ -87,7 +87,7 @@ const Profile: React.FC = () => {
             <NeonButton color="btc" icon={<Share2 size={16} />}>
               Share Profile
             </NeonButton>
-            <NeonButton color="sol" icon={<Edit2 size={16} />}>
+            <NeonButton color="btc" icon={<Edit2 size={16} />}>
               Edit Profile
             </NeonButton>
           </div>

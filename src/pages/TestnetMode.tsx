@@ -133,7 +133,7 @@ const TestnetMode: React.FC = () => {
               {isConnected ? (
                 <Link to={hasCompletedOnboarding ? "/app" : "/onboarding"}>
                   <NeonButton color="sol">
-                    {hasCompletedOnboarding ? 'Go to App' : 'Complete Setup'}
+                    {hasCompletedOnboarding ? 'Go to App' : 'Start Predicting'}
                   </NeonButton>
                 </Link>
               ) : (

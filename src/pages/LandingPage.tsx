@@ -47,7 +47,7 @@ const LandingPage: React.FC = () => {
               {isConnected ? (
                 <Link to={hasCompletedOnboarding ? "/app" : "/onboarding"}>
                   <NeonButton color="sol">
-                    {hasCompletedOnboarding ? 'Go to App' : 'Complete Setup'}
+                    {hasCompletedOnboarding ? 'Go to App' : 'Start Predicting'}
                   </NeonButton>
                 </Link>
               ) : (
@@ -95,7 +95,7 @@ const LandingPage: React.FC = () => {
               {isConnected ? (
                 <Link to={hasCompletedOnboarding ? "/app" : "/onboarding"}>
                   <NeonButton color="sol">
-                    {hasCompletedOnboarding ? 'Go to App' : 'Complete Setup'}
+                    {hasCompletedOnboarding ? 'Go to App' : 'Start Predicting'}
                   </NeonButton>
                 </Link>
               ) : (
@@ -363,7 +363,7 @@ const LandingPage: React.FC = () => {
                 </span>
               </Link>
               <p className="text-gray-400 mt-4 max-w-md">
-                Turn your crypto instincts into rewards with our gamified prediction platform.
+                Turn your crypto instincts into rewards with our prediction platform.
               </p>
             </div>
             
