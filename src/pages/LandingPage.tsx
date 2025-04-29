@@ -83,7 +83,7 @@ const LandingPage: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Turn your crypto instincts into rewards with our gamified prediction platform.
+              Turn your crypto instincts into rewards with our prediction platform.
             </motion.p>
             
             <motion.div
