@@ -7,12 +7,20 @@ import { useUser } from '../contexts/UserContext';
 import MarketChart from './marketChart';
 
 const MainDashboard: React.FC = () => {
-  const { mockPredictionHistory } = useUser();
+  const { mockPredictionHistory, addPrediction } = useUser();
   
   // Handler for when a prediction is made
   const handlePredictionMade = (prediction: any) => {
     console.log('Prediction made:', prediction);
-    // In a real app, this would call an API to submit the prediction
+    
+    // Add the prediction to the user's history
+    addPrediction({
+      token: prediction.token,
+      direction: prediction.direction,
+      timeframe: prediction.timeframe,
+      stake: prediction.amount,
+      result: 'pending'
+    });
   };
   
   return (
@@ -22,10 +30,10 @@ const MainDashboard: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-  {/* Market Chart section */}
-  <div className="mb-8">
-    <MarketChart />
-          </div>
+        {/* Market Chart section */}
+        <div className="mb-8">
+          <MarketChart />
+        </div>
           
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main prediction form */}
@@ -38,8 +46,8 @@ const MainDashboard: React.FC = () => {
                 Your Recent Activity
               </NeonHeading>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {mockPredictionHistory.slice(0, 4).map((prediction) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {mockPredictionHistory.map((prediction) => (
                   <motion.div 
                     key={prediction.id}
                     className={`

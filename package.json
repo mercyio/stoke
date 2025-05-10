@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.0.8",
     "@fontsource/orbitron": "^5.0.17",
+    "@suiet/wallet-kit": "^0.4.1",
     "apexcharts": "^4.7.0",
     "canvas-confetti": "^1.9.2",
     "framer-motion": "^10.16.4",

@@ -8,7 +8,7 @@ import NeonHeading from './ui/NeonHeading';
 import useConfetti from '../hooks/useConfetti';
 
 type Token = 'BTC' | 'ETH' | 'SOL' | 'MATIC';
-type Timeframe = '1m' | '5m' | '15m' | '1h' | '4h' | '1d';
+type Timeframe = '1w' | '2w' | '1m' | '3m' | '6m' | '1y';
 type Direction = 'up' | 'down';
 
 interface PredictionFormProps {
@@ -22,16 +22,25 @@ interface PredictionFormProps {
 
 const PredictionForm: React.FC<PredictionFormProps> = ({ onPredictionMade }) => {
   const [selectedToken, setSelectedToken] = useState<Token>('BTC');
-  const [selectedTimeframe, setSelectedTimeframe] = useState<Timeframe>('5m');
+  const [selectedTimeframe, setSelectedTimeframe] = useState<Timeframe>('1m');
   const [stakeAmount, setStakeAmount] = useState<number>(0.1);
   const [pendingDirection, setPendingDirection] = useState<Direction | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [predictionResult, setPredictionResult] = useState<'win' | 'loss' | null>(null);
   
   const fireConfetti = useConfetti();
   
   const tokens: Token[] = ['BTC', 'ETH', 'SOL', 'MATIC'];
-  const timeframes: Timeframe[] = ['1m', '5m', '15m', '1h', '4h', '1d'];
+  const timeframes: Timeframe[] = ['1w', '2w', '1m', '3m', '6m', '1y'];
+  
+  // Map for displaying human-readable timeframe labels
+  const timeframeLabels: Record<Timeframe, string> = {
+    '1w': '1 Week',
+    '2w': '2 Weeks',
+    '1m': '1 Month',
+    '3m': '3 Months',
+    '6m': '6 Months',
+    '1y': '1 Year'
+  };
   
   const handleSetStakeAmount = (value: number) => {
     // Ensure value is between 0.01 and 10
@@ -46,34 +55,19 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onPredictionMade }) => 
     // Simulate prediction processing
     await new Promise(resolve => setTimeout(resolve, 1500));
     
-    // Randomly determine win or loss (70% win rate for demo)
-    const isWin = Math.random() < 0.7;
+    // Call the onPredictionMade callback
+    onPredictionMade({
+      token: selectedToken,
+      timeframe: selectedTimeframe,
+      amount: stakeAmount,
+      direction
+    });
     
-    setPredictionResult(isWin ? 'win' : 'loss');
-    
-    if (isWin) {
-      // Fire confetti on win
-      fireConfetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
-    }
-    
-    // Reset after 3 seconds
+    // Reset form state
     setTimeout(() => {
-      setPredictionResult(null);
       setPendingDirection(null);
       setIsSubmitting(false);
-      
-      // Call the onPredictionMade callback
-      onPredictionMade({
-        token: selectedToken,
-        timeframe: selectedTimeframe,
-        amount: stakeAmount,
-        direction
-      });
-    }, 3000);
+    }, 1000);
   };
   
   const tokenColors: Record<Token, 'btc' | 'eth' | 'sol' | 'matic'> = {
@@ -101,63 +95,25 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onPredictionMade }) => 
     }[selectedToken];
     
     const timeframeMultiplier = {
-      '1m': 1.5,
-      '5m': 1.4,
-      '15m': 1.3,
-      '1h': 1.2,
-      '4h': 1.1,
-      '1d': 1.05
+      '1w': 1.5,
+      '2w': 1.6,
+      '1m': 1.8,
+      '3m': 2.0,
+      '6m': 2.2,
+      '1y': 2.5
     }[selectedTimeframe];
     
     return (tokenMultiplier * timeframeMultiplier).toFixed(2);
   };
   
-  if (predictionResult) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center justify-center py-10 px-4"
-      >
-        <NeonHeading 
-          color={predictionResult === 'win' ? 'sol' : 'btc'} 
-          level={2}
-        >
-          {predictionResult === 'win' ? 'You Won!' : 'You Lost!'}
-        </NeonHeading>
-        
-        <motion.div 
-          className="mt-6 text-4xl font-bold"
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 0.5, repeat: 2 }}
-        >
-          {predictionResult === 'win' && (
-            <span className="text-neon-sol">
-              +{(stakeAmount * parseFloat(calculateOdds())).toFixed(2)}
-            </span>
-          )}
-          {predictionResult === 'loss' && (
-            <span className="text-neon-btc">
-              -{stakeAmount.toFixed(2)}
-            </span>
-          )}
-        </motion.div>
-        
-        <p className="mt-4 text-gray-400">
-          Preparing your next prediction...
-        </p>
-      </motion.div>
-    );
-  }
-  
   return (
-    <NeonCard className="p-6 w-full max-w-lg mx-auto" color={tokenColors[selectedToken]}>
+    <NeonCard className="p-6 w-full max-w-3xl mx-auto" color={tokenColors[selectedToken]}>
       <div className="mb-6">
         <NeonHeading color={tokenColors[selectedToken]} level={3}>
           Make a Prediction
         </NeonHeading>
         <p className="text-gray-400 mt-2">
-          Predict where the price will be after {selectedTimeframe}
+          Predict where the price will be after {timeframeLabels[selectedTimeframe]}
         </p>
       </div>
       
@@ -187,12 +143,12 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onPredictionMade }) => 
           <Timer size={16} className="mr-1" />
           Timeframe
         </label>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex justify-between gap-2 overflow-x-auto pb-1">
           {timeframes.map(timeframe => (
             <button
               key={timeframe}
               onClick={() => setSelectedTimeframe(timeframe)}
-              className={`px-3 py-1.5 rounded-md transition-all ${
+              className={`px-3 py-1.5 rounded-md transition-all whitespace-nowrap flex-1 ${
                 selectedTimeframe === timeframe 
                   ? `bg-background-card border border-neon-${tokenColors[selectedToken]} shadow-neon shadow-${tokenColors[selectedToken]}` 
                   : 'bg-gray-850 hover:bg-gray-750'
@@ -201,7 +157,7 @@ const PredictionForm: React.FC<PredictionFormProps> = ({ onPredictionMade }) => 
                 '--neon-color': `var(--tw-neon-${tokenColors[selectedToken]})`,
               } as React.CSSProperties : undefined}
             >
-              {timeframe}
+              {timeframeLabels[timeframe]}
             </button>
           ))}
         </div>

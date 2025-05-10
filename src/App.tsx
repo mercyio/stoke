@@ -12,6 +12,8 @@ import Profile from './pages/Profile';
 import TestnetMode from './pages/TestnetMode';
 import Onboarding from './pages/Onboarding';
 import { UserProvider, useUser } from './contexts/UserContext';
+import { WalletProvider } from '@suiet/wallet-kit';
+import '@suiet/wallet-kit/style.css';
 
 // Protected route wrapper
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -60,9 +62,11 @@ function AppRoutes() {
 
 function App() {
   return (
-    <UserProvider>
-      <AppRoutes />
-    </UserProvider>
+    <WalletProvider>
+      <UserProvider>
+        <AppRoutes />
+      </UserProvider>
+    </WalletProvider>
   );
 }
 
