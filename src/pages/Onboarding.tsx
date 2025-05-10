@@ -250,7 +250,7 @@ const Onboarding: React.FC = () => {
               )}
               
               <p className="text-sm text-gray-500 text-center">
-                Don't have a Sui wallet? <a href="https://sui.io/wallet" target="_blank" rel="noopener noreferrer" className="text-neon-sol">Get one here</a>
+                Don't have a Sui wallet? <a href="https://slush.app" target="_blank" rel="noopener noreferrer" className="text-neon-sol">Get one here</a>
               </p>
             </motion.div>
           )}
